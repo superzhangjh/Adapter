@@ -52,12 +52,14 @@ class RvAdapter(private val scopeImpl: MutableListScopeImpl) : RecyclerView.Adap
     }
 }
 
+var grobalitemType = 0
+
 class MutableListScopeImpl() : MutableListScope {
     val mItemScopes = mutableListOf<ItemScopeImpl<*>>()
     val itemTypeMap = mutableMapOf<Int, ItemScopeImpl<*>>()
 
     override fun <VB : ViewBinding> addItem(block: ViewBindingItemScope<VB>.() -> Unit): MutableListScope {
-        val itemScope = ItemScopeImpl<VB>()
+        val itemScope = ItemScopeImpl<VB>(grobalitemType++)
         //todo:itemType动态生成,如果遇到相同的类型的itemType,则在原有的基础上加1
         itemTypeMap[itemScope.itemType] = itemScope
         mItemScopes.add(itemScope)
@@ -66,13 +68,11 @@ class MutableListScopeImpl() : MutableListScope {
     }
 }
 
-class ItemScopeImpl<VB: ViewBinding> : ViewBindingItemScope<VB> {
+class ItemScopeImpl<VB: ViewBinding>(val itemType: Int) : ViewBindingItemScope<VB> {
 
     lateinit var onCreateViewBindingBlock: (LayoutInflater) -> VB
     var oInitBlock: (ViewBindingHolderScope<VB>.() -> Unit)? = null
     var onBindBlock: (ViewBindingHolderScope<VB>.() -> Unit)? = null
-
-    val itemType = 1
 
     override fun onCreateViewBinding(block: (LayoutInflater) -> VB) {
         onCreateViewBindingBlock = block
