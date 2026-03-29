@@ -1,10 +1,11 @@
-package com.max.adapter.toolbar.controller
+package com.max.adapter.toolbar.controller.sort
 
 import android.app.AlertDialog
 import android.content.Context
 import android.widget.Toast
 import com.max.adapter.toolbar.adpater.DataToolbarAdapter
-import com.max.adapter.toolbar.controller.sort.ISortStrategy
+import com.max.adapter.toolbar.controller.IOptionController
+import com.max.adapter.toolbar.controller.IToolbarController
 
 class SortController<T>(val strategies: List<ISortStrategy<T>>) : IOptionController<T> {
     private val items = strategies.map { it.getName() }.toTypedArray()

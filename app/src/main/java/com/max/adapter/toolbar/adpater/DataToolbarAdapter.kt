@@ -10,7 +10,7 @@ import com.max.adapter.toolbar.controller.IToolbarController
 class DataToolbarAdapter<T>(
     private val controller: IToolbarController<T>,
     val data: List<IOptionController<T>>
-    ) : RecyclerView.Adapter<DataToolbarAdapter.VH>() {
+) : RecyclerView.Adapter<DataToolbarAdapter.VH>() {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,

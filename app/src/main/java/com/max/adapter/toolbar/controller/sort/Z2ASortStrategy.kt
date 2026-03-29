@@ -7,6 +7,6 @@ class Z2ASortStrategy : ISortStrategy<String> {
     }
 
     override fun onSort(dataSource: List<String>): List<String> {
-        return dataSource
+        return dataSource.sortedByDescending { it }
     }
 }

@@ -7,6 +7,6 @@ class A2ZSortStrategy : ISortStrategy<String> {
     }
 
     override fun onSort(dataSource: List<String>): List<String> {
-        return dataSource
+        return dataSource.sortedBy { it }
     }
 }
